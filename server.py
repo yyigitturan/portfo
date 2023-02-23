@@ -27,7 +27,18 @@ def write_to_csv(data):
 
 @app.route('/submit_form', methods=['POST', 'GET'])
 def submit_form():
+    #Ｅｍａｉｌ ａｄｄｒｅｓ ｉｓ ｒｅｑｕｉｒｅｄ
     if request.method == 'POST':
+        if request.method == 'POST':
+            email = request.form['email']
+            if not email:
+                return render_template('error.html', message='Ｅｍａｉｌ ａｄｄｒｅｓ ｉｓ ｒｅｑｕｉｒｅｄ')
+            else:
+                # email address is not empty, process the form
+                # ...
+                return render_template('contact.html')
+        else:
+            return render_template('index.html')
         try:
           data = request.form.to_dict()
           write_to_csv(data)
